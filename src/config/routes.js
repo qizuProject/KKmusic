@@ -1,8 +1,9 @@
 // 路由配置文件
+import Playdetail from "@pages/Playdetail";
 const routes = [
   {
-    path: "/",
-    component: "Home",
+    path: "/playdetail",
+    component: Playdetail,
   },
 ];
 export default routes;
