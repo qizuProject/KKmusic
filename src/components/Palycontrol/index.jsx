@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { getPlayList } from "@redux/actions";
 import { Slider, Popover, Button, Menu, Dropdown } from "antd";
 import {
   PlayCircleOutlined,
@@ -11,11 +13,11 @@ import {
   MenuFoldOutlined,
   SoundOutlined,
   PlusOutlined,
-  DeleteOutlined
+  DeleteOutlined,
 } from "@ant-design/icons";
 import "./index.css";
 import { reqPlayList } from "@api/songPlayList";
-export default class index extends Component {
+class Playcontrol extends Component {
   state = {
     palylist: [],
   };
@@ -35,14 +37,15 @@ export default class index extends Component {
     console.log(value);
   };
   async componentDidMount() {
-    let palylist = await reqPlayList();
-    console.log(palylist.data.data);
-    this.setState({
-      palylist: palylist.data.data,
-    });
+    let palyList = await this.props.getPlayList();
+    /* this.setState({
+      palylist: palyList,
+    }); */
   }
 
   render() {
+    // 歌单
+    const  {playList} = this.props
     // 高品质
     const content = (
       <div>
@@ -53,11 +56,13 @@ export default class index extends Component {
     // 上拉歌单框
     const menu = (
       <Menu className="list_con " id="ant-dropdown-menu">
-        <Menu.Item>
+        {
+          playList.map((item)=> {
+            return <Menu.Item>
           <div className="flex_c list_item">
             <div className="list_idx"></div>
             <div className="song_name">
-              <span>三生试下</span>
+              <span>{三生试下}</span>
             </div>
             <div className="artist">
               <a href="/singer_detail/3281874">大欢</a>
@@ -71,6 +76,8 @@ export default class index extends Component {
             <div className="time">04:23</div>
           </div>
         </Menu.Item>
+          })
+        }
       </Menu>
     );
     return (
@@ -167,3 +174,7 @@ export default class index extends Component {
     );
   }
 }
+// 通过conect 传递 需要数据传数据 需要方法传方法
+export default connect((state) => ({ playList: state.playList }), {
+  getPlayList,
+})(Playcontrol);

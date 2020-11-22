@@ -1,11 +1,13 @@
-import {combineReducers} from 'redux'
-function xxx(prevState={}, action) {
+import { combineReducers } from "redux";
+function playList(prevState = [], action) {
   switch (action.type) {
-    default: 
-    return prevState
+    case "GET_PLAYLIST":
+      return action.data;
+    default:
+      return prevState;
   }
 }
 
 export default combineReducers({
-  xxx,
-})
+  playList,
+});
