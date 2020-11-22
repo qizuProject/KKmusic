@@ -1,35 +1,16 @@
 //歌单部分，分为最新，最热
-import { NEW, HOT } from "./contants";
+import { NEW, HOT, THEME, MOOD, SCENE, TAG } from "./contants";
 //引入api
-import { reqDefaultPlayList } from "@api/songlist";
+import { reqDefaultPlayList, reqTags } from "@api/songlist";
 export const newPlayList = (data) => ({ type: NEW, data: data });
 export const hotPlayList = (data) => ({ type: HOT, data: data });
+// export const theme_tag = (data) => ({ type: THEME, data: data });
+// export const mood_tag = (data) => ({ type: MOOD, data: data });
+// export const scene_tag = (data) => ({ type: SCENE, data: data });
 
-//最新歌单
-// export const newPlayListAsync = (order, rn, pn) => {
-//   return async (dispatch) => {
-//     const result = await reqDefaultPlayList(order, rn, pn);
-//     const data = result.data.map((item) => {
-//       return {
-//         img: item.img,
-//         title: item.name,
-//         listencnt: item.listencnt,
-//         id: item.id,
-//       };
-//     });
-//     const action = newPlayList(data);
-//     dispatch(action);
-//   };
-// };
+export const playListTags = (data) => ({ type: TAG, data: data });
 
-// export const hotPlayListAsync = (order, rn, pn) => {
-//   return async (dispatch) => {
-//     const result = await reqDefaultPlayList(order, rn, pn);
-//     const action = hotPlayList(result);
-//     dispatch(action);
-//   };
-// };
-
+//请求最新或最热歌单
 export const newOrHotPlayListAsync = (order, rn, pn) => {
   return async (dispatch) => {
     const result = await reqDefaultPlayList(order, rn, pn);
@@ -50,3 +31,52 @@ export const newOrHotPlayListAsync = (order, rn, pn) => {
     dispatch(action);
   };
 };
+
+//请求标签
+export const tags = () => {
+  return async (dispatch) => {
+    let result = await reqTags();
+    const tags = result.map((item) => {
+      return {
+        type_id: item.id,
+        type: item.name,
+        data: item.data.map((tag) => {
+          return {
+            name: tag.name,
+            tag_id: tag.id,
+          };
+        }),
+      };
+    });
+    // console.log(tags);
+    const action = playListTags(tags);
+    dispatch(action);
+
+    // let action;
+    // switch (type) {
+    //   case "theme":
+    //     result = mapData(result, 0);
+    //     action = theme_tag(result);
+    //     return;
+    //   case "mood":
+    //     result = mapData(result, 1);
+    //     action = mood_tag(result);
+    //     return;
+    //   case "scene":
+    //     result = mapData(result, 2);
+    //     action = scene_tag(result);
+    //     return;
+    // }
+    // dispatch(action);
+  };
+};
+//处理数据
+function mapData(result, num) {
+  const tags = result[num].data.map((tag) => {
+    return {
+      name: tag.name,
+      id: tag.id,
+    };
+  });
+  return tags;
+}

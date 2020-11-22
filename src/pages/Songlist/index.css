@@ -153,11 +153,11 @@ span.active:after {
 
 .showTag {
   position: absolute;
-  left: 0;
-  top: 44px;
-  background: #999;
+  left: 119px;
+  top: 209px;
+  background: #fff;
   width: 65.57%;
-  height: 646px;
+  /* height: 646px; */
   max-height: 646px;
   box-shadow: 0 4px 20px 0 rgba(65, 67, 70, 0.08);
   padding: 30px 10px 0 36px;
@@ -165,9 +165,53 @@ span.active:after {
 }
 .tag {
   max-height: 586px;
-  height: 586px;
-  overflow: hidden;
+  /* height: 586px; */
+  overflow: auto;
   position: relative;
   padding-right: 36px;
-  background-color: thistle;
+  /* background-color: thistle; */
+}
+
+.tag_header {
+  display: flex;
+}
+.tag_icon {
+  margin-top: 5px;
+}
+.tag_title {
+  font-weight: 700;
+}
+.list_tag {
+  display: inline-block;
+  background: #ffe12c;
+  padding: 6px 18px;
+  border-radius: 16px;
+  margin: 0 10px 10px 0;
+  cursor: pointer;
+  color: #333;
+  font-weight: 600;
+  line-height: 20px;
+  height: 32px;
+  margin-top: 4px;
+  margin-left: 32px;
+}
+
+.content {
+  margin-top: 20px;
+}
+.tag_content {
+  padding: 10px 10px 10px 30px;
+}
+.content .tag_content .single_tag {
+  padding: 6px 18px;
+  background: #f7f7f7;
+  border-radius: 16px;
+  margin: 0 10px 10px 0;
+  cursor: pointer;
+  line-height: 20px;
+  font-weight: 300;
+  color: #000;
+}
+.content .tag_content .single_tag:hover {
+  background: #ffe12c !important;
 }

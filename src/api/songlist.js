@@ -1,8 +1,5 @@
 import request from "@utils/request";
 
-// 当前公共请求地址前缀
-const url_prefix = "";
-
 //请求推荐歌单数据
 export const reqSongList = () => {
   return request({
@@ -11,20 +8,17 @@ export const reqSongList = () => {
   });
 };
 
-//请求默认歌单
-// order:new最新，hot最热  rn:每页的条数，  pn:页数
-// export const reqDefaultPlayList = (order = "new", rn = 10, pn = 1) => {
-//   return request({
-//     method: "GET",
-//     url: `/playList`,
-//     data: {
-//       order,
-//       rn,
-//       pn,
-//     },
-//   });
-// };
-
+//请求最新或最热歌单
 export const reqDefaultPlayList = (order = "new", rn = 10, pn = 1) => {
   return request.get(`/playList?order=${order}&rn=${rn}&pn=${pn}`);
+};
+
+//请求标签
+export const reqTags = () => {
+  return request.get(`/playList_tags`);
+};
+
+//根据tag的id请求歌单
+export const reqPlayListById = (id) => {
+  return request.get(`/playList/category?id=${id}`);
 };
