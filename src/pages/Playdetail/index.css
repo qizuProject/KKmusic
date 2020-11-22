@@ -262,48 +262,5 @@
   opacity: .8;
   margin-top: 5px;
 }
-/* 最新评论 */
-.comment_con .type {
-  font-size: 22px;
-  line-height: 30px;
-  font-weight: 600;
-  margin-bottom: 22px;
-}
-.comment_con .type .comment-num {
-  margin-left: 8px;
-  font-weight: 300;
-  font-size: 14px;
-}
-.comment_con .all-comment .each-comment {
-  display: flex;
-  margin: 16px 0 20px;
-}
 
-.comment_con .all-comment .each-comment .each-comment-msg .each-reply-content {
-  margin-top: 10px;
-  margin-left: 3px;
-  border-left: 1px solid #dbdbdb;
-  padding: 0 10px;
-  font-size: 14px;
-  line-height: 20px;
-  color: #666;
-}
-.comment_con .all-comment .each-comment .each-comment-msg .each-comment-content .reply-name {
-  color: #333;
-  font-size: 14px;
-  margin-right: 5px;
-  cursor: text;
-}
-.comment_con .all-comment .each-comment .each-comment-msg .each-reply-content {
-  margin-top: 10px;
-  margin-left: 3px;
-  border-left: 1px solid #dbdbdb;
-  padding: 0 10px;
-  font-size: 14px;
-  line-height: 20px;
-  color: #666;
-}
-.comment_con .all-comment .each-comment .each-comment-msg .each-comment-content .reply-name span {
-  color: #296294;
-}
 

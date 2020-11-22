@@ -161,3 +161,78 @@
   border-radius: 2px;
   cursor: pointer;
 } */
+#components-dropdown-demo-placement .ant-btn {
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+.ant-row-rtl #components-dropdown-demo-placement .ant-btn {
+  margin-right: 0;
+  margin-bottom: 8px;
+  margin-left: 8px;
+}
+/* 歌单框 */
+.list_con {
+  max-height: 414px;
+  overflow: hidden;
+  /* margin-top: 20px; */
+  overflow-y: auto;
+}
+#ant-dropdown-menu {
+  position: fixed;
+  bottom: 70px;
+  margin: 0;
+  left: 40vw;
+  width: 400px;
+  /* padding: 0 25px; */
+  text-align: left;
+  list-style-type: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border-radius: 2px;
+  outline: none;
+  -webkit-box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12),
+    0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12);
+}
+
+.list_con .list_item {
+  height: 46px;
+  padding: 0 25px;
+}
+.list_con .list_item .list_idx {
+  position: relative;
+  width: 16px;
+  height: 20px;
+  text-align: center;
+  margin-right: 8px;
+  line-height: 20px;
+}
+.list_con .list_item .song_name {
+  width: 198px;
+  height: 20px;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 20px;
+  margin-right: 22px;
+}
+.list_con .list_item .artist {
+  width: 163px;
+  height: 20px;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 20px;
+}
+.list_con .list_item .time {
+  margin-left: 16px;
+  height: 16px;
+  line-height: 16px;
+  font-weight: 600;
+}
+.song_opts {
+  justify-content: space-between;
+  width: 80px;
+}
