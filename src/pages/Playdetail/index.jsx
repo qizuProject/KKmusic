@@ -11,9 +11,14 @@ import {
 } from "@ant-design/icons";
 import "./index.css";
 import Playcontrol from "@comps/Palycontrol";
+// 引入请求函数
+import { reqMusicInfo, reqMusicRecComment } from "@api/palydetail";
+
 export default class Playdetail extends Component {
   state = {
-    current: 3,
+    current: 1,
+    musicInfo: {}, // 歌曲详情
+    recComment: [],
   };
   onChange = (page) => {
     console.log(page);
@@ -21,7 +26,24 @@ export default class Playdetail extends Component {
       current: page,
     });
   };
+  async componentDidMount() {
+    try {
+      // 发送请求 获取歌曲详情信息
+      let musicInfo = await reqMusicInfo("156499973");
+      // 热门评论
+      let recComment = await reqMusicRecComment("156499973");
+      console.log(recComment.rows);
+      // 更新数据
+      this.setState({
+        musicInfo: musicInfo.data,
+        recComment: recComment.rows,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
   render() {
+    const { musicInfo } = this.state;
     return (
       <>
         <div className="container">
@@ -31,15 +53,9 @@ export default class Playdetail extends Component {
               {/* 内容左边 */}
               <div className="info_l">
                 <div className="cover_out">
-                  <img
-                    src="https://img1.kuwo.cn/star/albumcover/500/50/90/1786305155.jpg"
-                    className="cover"
-                  />
+                  <img src={musicInfo.albumpic} className="cover" />
                   <p className="intr">专辑简介</p>
-                  <p className="intr_txt">
-                    入了心的人 怎说忘就忘 动了情的人 怎说放就放 往后余生
-                    你见与不见 你都在我心上
-                  </p>
+                  <p className="intr_txt">{musicInfo.albuminfo}</p>
                   <Button
                     className="download bg_primary"
                     type="primary"
@@ -60,24 +76,24 @@ export default class Playdetail extends Component {
               </div>
               {/* 内容右边 */}
               <div className="info_r">
-                <input type="hidden" value="入了心的人" />
+                {/* <input type="hidden" value="入了心的人" /> */}
                 {/* 歌曲信息 */}
                 {/* 上部分 */}
                 <div>
                   {/* <h1 style={{ display: "block" }}>入了心的人</h1> */}
                   <p className="song_name flex_c">
-                    <span className="name">入了心的人</span>
+                    <span className="name">{musicInfo.name}</span>
                   </p>
                   <p>
-                    <span className="name">苏谭谭</span>
+                    <span className="name">{musicInfo.artist}</span>
                   </p>
                   <p className="song_info">
                     <span>专辑：</span>
                     <span className="tip"></span>
-                    <span className="tip album_name">入了心的人</span>
+                    <span className="tip album_name">{musicInfo.album}</span>
                     <span>发行时间：</span>
                     {/* <span>上传时间</span> */}
-                    <span>2020-11-17</span>
+                    <span>{musicInfo.releaseDate}</span>
                   </p>
                   <div className="btns">
                     <Button

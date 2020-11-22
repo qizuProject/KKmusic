@@ -19,11 +19,7 @@ request.interceptors.request.use((config) => {
 request.interceptors.response.use(
   //响应成功
   (response) => {
-    if (response.data.code) {
-      return response.data.data;
-    } else {
-      return Promise.reject(response.data.message);
-    }
+    return response.data;
   },
   //响应失败
   (error) => {
