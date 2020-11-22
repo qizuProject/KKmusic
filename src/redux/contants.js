@@ -4,6 +4,3 @@ export const HOT = "hot";
 
 //标签，分为主体，心情，场景
 export const TAG = "tag";
-export const THEME = "theme";
-export const MOOD = "mood";
-export const SCENE = "scene";

@@ -16,7 +16,6 @@ function songList(prevState = [], action) {
 function platListTags(prevState = [], action) {
   switch (action.type) {
     case TAG:
-      // console.log(action.data);
       return action.data;
 
     default:

@@ -21,6 +21,8 @@ class Songlist extends Component {
     upOrDown: false, //切换精选歌单显示隐藏，true为up
     isActive: true, //最新最热按钮点击高亮标识,true为最新
     tags: [], //存放标签
+    isShow: false, //显示隐藏tag区域
+    tag_title: "精选歌单",
   };
   async componentDidMount() {
     //开始默认渲染最热歌单数据，每页10条数，默认显示第一页
@@ -67,7 +69,7 @@ class Songlist extends Component {
   };
 
   //点击tag
-  changeList = (id) => {
+  changeList = (id, name) => {
     return async () => {
       const result = await reqPlayListById(id);
       const data = result.data.map((item) => {
@@ -80,12 +82,30 @@ class Songlist extends Component {
       });
       this.setState({
         songList: data,
+        isShow: !this.state.isShow,
+        tag_title: name,
+        upOrDown: !this.state.upOrDown,
       });
     };
   };
 
+  //点击icon，切换并显示隐藏tag区域
+  changeIcon = () => {
+    //切换icon,显示隐藏tag区域
+    const { upOrDown, isShow } = this.state;
+    this.setState({ upOrDown: !upOrDown, isShow: !isShow });
+  };
+
   render() {
-    const { songList, currentPage, upOrDown, isActive, tags } = this.state;
+    const {
+      songList,
+      currentPage,
+      upOrDown,
+      isActive,
+      tags,
+      isShow,
+      tag_title,
+    } = this.state;
     return (
       <div className="songlist_page">
         {/* 头部 */}
@@ -117,21 +137,11 @@ class Songlist extends Component {
 
             {/* 最新最热 */}
             <div className="tit_out flex_c">
-              <span className="tit">精选歌单</span>
+              <span className="tit">{tag_title}</span>
               {upOrDown ? (
-                <UpOutlined
-                  className="icon"
-                  onClick={() => {
-                    this.setState({ upOrDown: !upOrDown });
-                  }}
-                />
+                <UpOutlined className="icon" onClick={this.changeIcon} />
               ) : (
-                <DownOutlined
-                  className="icon"
-                  onClick={() => {
-                    this.setState({ upOrDown: !upOrDown });
-                  }}
-                />
+                <DownOutlined className="icon" onClick={this.changeIcon} />
               )}
 
               <div>
@@ -151,49 +161,56 @@ class Songlist extends Component {
               </div>
 
               {/* 标签部分 */}
-              <div className="showTag">
-                <div className="tag">
-                  <div>
-                    {/* 头部 */}
-                    <div className="tag_header">
-                      <BookOutlined className="tag_icon" />
-                      <h4 className="tag_title">默认</h4>
-                    </div>
+              {isShow ? (
+                <div className="showTag">
+                  <div className="tag">
+                    <div>
+                      {/* 头部 */}
+                      <div className="tag_header">
+                        <BookOutlined className="tag_icon" />
+                        <h4 className="tag_title">默认</h4>
+                      </div>
 
-                    {/* 精选歌单 */}
-                    <span className="list_tag">精选歌单</span>
+                      {/* 精选歌单 */}
+                      <span className="list_tag">精选歌单</span>
 
-                    {/* 内容区域 */}
-                    <div className="content">
-                      {tags.map((tag) => {
-                        return (
-                          <div key={tag.type_id}>
-                            <div className="tag_header">
-                              <AppstoreOutlined className="tag_icon" />
-                              <h4 className="tag_title">{tag.type}</h4>
+                      {/* 内容区域 */}
+                      <div className="content">
+                        {tags.map((tag) => {
+                          return (
+                            <div key={tag.type_id}>
+                              <div className="tag_header">
+                                <AppstoreOutlined className="tag_icon" />
+                                <h4 className="tag_title">{tag.type}</h4>
+                              </div>
+
+                              <div className="tag_content">
+                                {tag.data.map((item) => {
+                                  return (
+                                    <Tag
+                                      color="#f7f7f7"
+                                      className="single_tag"
+                                      key={item.tag_id}
+                                      onClick={this.changeList(
+                                        item.tag_id,
+                                        item.name
+                                      )}
+                                    >
+                                      {item.name}
+                                    </Tag>
+                                  );
+                                })}
+                              </div>
                             </div>
-
-                            <div className="tag_content">
-                              {tag.data.map((item) => {
-                                return (
-                                  <Tag
-                                    color="#f7f7f7"
-                                    className="single_tag"
-                                    key={item.tag_id}
-                                    onClick={this.changeList(item.tag_id)}
-                                  >
-                                    {item.name}
-                                  </Tag>
-                                );
-                              })}
-                            </div>
-                          </div>
-                        );
-                      })}
+                          );
+                        })}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              ) : (
+                <></>
+              )}
             </div>
 
             {/* 主体部分 */}
