@@ -6,7 +6,8 @@
       "@api/*": ["./src/api/*"],
       "@pages/*": ["./src/pages/*"],
       "@comps/*": ["./src/components/*"],
-      "@assets/*": ["./src/assets/*"]
+      "@assets/*": ["./src/assets/*"],
+      "@config/*": ["./src/config/*"]
     },
     "baseUrl": ".",
     "module": "es6"

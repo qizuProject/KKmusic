@@ -1,0 +1,23 @@
+{
+  "id": "2219291",
+  "name": "music",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "554517",
+      "name": "播放",
+      "font_class": "iconset0481",
+      "unicode": "e768",
+      "unicode_decimal": 59240
+    },
+    {
+      "icon_id": "1117917",
+      "name": "播放",
+      "font_class": "bofang",
+      "unicode": "e77e",
+      "unicode_decimal": 59262
+    }
+  ]
+}
