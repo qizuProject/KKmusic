@@ -1,5 +1,5 @@
-import request from '../untils/request'
+import request from "../untils/request";
 // 默认歌单
-export const  reqPlayList = (rn=1,pn=3) => {
-  return request.get(`/playList?&rn=${rn}0&pn=${pn}`)
-}
+export const reqPlayList = (pid = "1082685104") => {
+  return request.get(`/musicList?pid=${pid}`);
+};

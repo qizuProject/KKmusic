@@ -19,7 +19,7 @@ export default class Playdetail extends Component {
   state = {
     current: 1,
     musicInfo: {}, // 歌曲详情
-    mid:'156499973', // 歌曲id
+    mid: "156499973", // 歌曲id
   };
   onChange = (page) => {
     console.log(page);
@@ -50,7 +50,7 @@ export default class Playdetail extends Component {
               {/* 内容左边 */}
               <div className="info_l">
                 <div className="cover_out">
-                  <img src={musicInfo.albumpic} className="cover" />
+                  <img src={musicInfo.albumpic} className="cover" alt="hh" />
                   <p className="intr">专辑简介</p>
                   <p className="intr_txt">{musicInfo.albuminfo}</p>
                   <Button

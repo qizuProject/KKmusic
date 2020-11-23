@@ -1,8 +1,8 @@
 .playControl {
   position: fixed;
   left: 0;
-  bottom: -70px;
-  /* bottom: 0; */
+  /* bottom: -70px; */
+  bottom: 0;
   z-index: 11000;
   padding-top: 20px;
   height: 90px;
@@ -190,7 +190,7 @@
   background-clip: padding-box;
   border-radius: 2px;
   outline: none;
-  background-color: rgb(223, 221, 221);
+  background-color: rgb(253, 248, 248);
   -webkit-box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12),
     0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
   box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12);

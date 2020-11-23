@@ -6,17 +6,23 @@ export default class Comment extends Component {
   state = {
     recComment: [], // 热门评论
     newComment: [], // 最新评论
+    getComment: true,
   };
-  async componentDidMount() {
-    // 接收传递过来的mid
-    const { mid } = this.props;
-    // 热门评论
-    let recComment = await reqMusicRecComment(mid);
-    let newComment = await reqNewComment(mid);
-    this.setState({
-      recComment: recComment.rows,
-      newComment: newComment.rows,
-    });
+
+  async componentDidUpdate() {
+    const { getComment } = this.state;
+    if (getComment) {
+      // 接收传递过来的mid
+      const { mid } = this.props;
+      // 热门评论
+      let recComment = await reqMusicRecComment(mid);
+      let newComment = await reqNewComment(mid);
+      this.setState({
+        recComment: recComment.rows,
+        newComment: newComment.rows,
+        getComment: false,
+      });
+    }
   }
   render() {
     const { recComment, newComment } = this.state;
@@ -79,13 +85,13 @@ export default class Comment extends Component {
                         <a href="##" className="reply-name">
                           回复
                           <span>
-                            @
+                            {/*  @
                             {decodeURIComponent(item.reply.u_name)
                               ? decodeURIComponent(item.reply.u_name)
-                              : ""}
+                              : ""} */}
                           </span>
                         </a>
-                        <span>{item.reply.msg}</span>
+                        <span>{/* {item.reply.msg} */}</span>
                       </div>
                       <div className="each-reply-content">
                         <span className="text-selection">{item.msg}</span>

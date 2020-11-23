@@ -9,9 +9,8 @@ const getPlayListSuccess = (playlist) => ({
 export const getPlayList = () => {
   return async (dispatch) => {
     const result = await reqPlayList();
-    console.log(result);
     // 触发dispatch 更新redux
-    const action = await getPlayListSuccess(result.data.data);
+    const action = await getPlayListSuccess(result.data.musicList);
     dispatch(action);
   };
 };
