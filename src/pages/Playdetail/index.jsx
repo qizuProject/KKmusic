@@ -19,7 +19,7 @@ export default class Playdetail extends Component {
   state = {
     current: 1,
     musicInfo: {}, // 歌曲详情
-    mid: "156499973", // 歌曲id
+    mid: "148370024", // 歌曲id
     musicLrcList: [], // 歌词数组
     islrcList: false, // 控制是否有歌词
     currentTime: "", // 歌曲当前播放时间
@@ -44,8 +44,6 @@ export default class Playdetail extends Component {
             transform: `translateY(-${2.145 * i}rem)`,
           },
         });
-      }else{
-
       }
     }
   };
@@ -59,26 +57,25 @@ export default class Playdetail extends Component {
   async componentDidMount() {
     try {
       // 发送请求 获取歌曲详情信息
-      let musicInfo = await reqMusicInfo("151728901");
+      let musicInfo = await reqMusicInfo("148370024");
       // 更新数据
       this.setState({
         musicInfo: musicInfo.data,
       });
+      // 获取歌词
+      let musicLrcList = await reqMusicLrcList("148370024");
+      if (musicLrcList.data) {
+        this.setState({
+          islrcList: true,
+          musicLrcList: musicLrcList.data.lrclist,
+        });
+      }
     } catch (error) {
       console.log(error);
     }
   }
 
-  async componentDidUpdate() {
-    // 获取歌词
-    let musicLrcList = await reqMusicLrcList("151728901");
-    if (musicLrcList.data) {
-      this.setState({
-        islrcList: true,
-        musicLrcList: musicLrcList.data.lrclist,
-      });
-    }
-  }
+  async componentDidUpdate() {}
   render() {
     const {
       musicInfo,
@@ -198,8 +195,10 @@ export default class Playdetail extends Component {
                         <p>暂无歌词</p>
                       </div>
                       <div
-                        style={{ display: islrcList ? "block" : "none" }}
-                        style={lycStyle}
+                        style={{
+                          display: islrcList ? "block" : "none",
+                          ...lycStyle,
+                        }}
                       >
                         {musicLrcList.map((item, index) => {
                           return (
