@@ -4,4 +4,8 @@ import request from "../untils/request";
 export const reqMusicInfo = (mid) => {
   return request.get(`/musicInfo?mid=${mid}`);
 };
-// 获取歌曲热门评论
+
+// 歌曲播放链接
+export const reqMusicPlayUrl = (mid) => {
+  return request.get(`/url?rid=${mid}`)
+}

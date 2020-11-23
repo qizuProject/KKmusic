@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getPlayList } from "@redux/actions";
 import { Slider, Popover, Button, Menu, Dropdown } from "antd";
+import moment from "moment";
 import {
   PlayCircleOutlined,
   StepBackwardOutlined,
@@ -17,12 +18,15 @@ import {
   PauseOutlined,
 } from "@ant-design/icons";
 import "./index.css";
-import { reqMusicInfo } from "@api/palydetail";
+import { reqMusicInfo, reqMusicPlayUrl } from "@api/palydetail";
 class Playcontrol extends Component {
   state = {
-    isplay: false, // 控制播放
+    isplay: false, // 控制播放图标
     currentAduioTime: 0, // 进度条位置
     musicInfo: [],
+    currentIndex: null, // 当前播放歌曲的索引
+    playlist: [],
+    songCurrentTime: null, // 歌曲当前播放的时间
   };
   audioRef = React.createRef();
   // 触发滚动条
@@ -48,15 +52,19 @@ class Playcontrol extends Component {
     this.audioRef.current.volume = value / 100;
   };
   // 请求音乐信息
-  getmusicinfo = async () => {
+  getmusicinfo = async (mid = "156499973") => {
     // 发送请求 获取歌曲详情信息
-    let musicInfo = await reqMusicInfo("156499973");
+    let musicInfo = await reqMusicInfo(mid);
     this.setState({
       musicInfo: musicInfo.data,
     });
   };
   async componentDidMount() {
-    this.props.getPlayList();
+    await this.props.getPlayList();
+    // 将redux中  歌曲列表保存
+    this.setState({
+      playlist: this.props.playList,
+    });
     // 请求歌曲信息  需要id  这里没有
     this.getmusicinfo();
   }
@@ -67,7 +75,11 @@ class Playcontrol extends Component {
         currentAduioTime:
           (this.audioRef.current.currentTime / this.audioRef.current.duration) *
           100,
+        songCurrentTime: moment(
+          String(this.audioRef.current.currentTime)
+        ).format("mm:ss"),
       });
+      console.log(this.audioRef.current.currentTime.toString());
     };
   }
   // 点击切换播放/暂停音乐
@@ -86,12 +98,57 @@ class Playcontrol extends Component {
       }
     };
   };
-  // 播放时间变化
+  // 获取id 播放歌曲  更新歌曲函数
+  async playSong(mid) {
+    // 获取歌曲详情
+    this.getmusicinfo(mid);
+    // 获取播放连接
+    let result = await reqMusicPlayUrl(mid);
 
+    // 将链接给到aduio
+    this.audioRef.current.src = result.url;
+    this.audioRef.current.play();
+  }
+  // 点击歌单内歌曲播放
+  clickToPlay = (mid, index) => {
+    return async () => {
+      this.playSong(mid);
+      // 改变图标的状态
+      this.setState({
+        isplay: true, // 控制播放图标
+        currentIndex: index, // 保存当前歌的索引
+      });
+    };
+  };
+  // 上一首
+  playPrevOrNext = (type) => {
+    return () => {
+      const { currentIndex } = this.state;
+      let newIndex = null;
+      if (type === "prev") {
+        newIndex = currentIndex - 1;
+      } else {
+        newIndex = currentIndex + 1;
+      }
+      // 合成事件中 setState是异步的  setState 接收第二个参数 等到setState更新完才 执行第二参数回调
+      this.setState(
+        {
+          currentIndex: newIndex,
+        },
+        () => {
+          // 通过索引找到id
+          let mid = this.state.playlist[this.state.currentIndex].rid;
+          console.log(mid);
+          this.playSong(mid);
+        }
+      );
+    };
+  };
   render() {
     // 歌单
     const { playList } = this.props;
-    const { isplay, currentAduioTime, musicInfo } = this.state;
+    const { isplay, currentAduioTime, musicInfo, songCurrentTime } = this.state;
+    // console.log(songCurrentTime);
     // 高品质
     const content = (
       <div>
@@ -101,10 +158,14 @@ class Playcontrol extends Component {
     );
     // 上拉歌单框
     const menu = (
-      <Menu className="list_con " data-id="ant-dropdown-menu">
+      <Menu className="list_con " id="ant-dropdown-menu">
         {playList.map((item, index) => {
           return (
-            <Menu.Item key={item.rid} id={item.rid}>
+            <Menu.Item
+              key={item.rid}
+              data-id={item.rid}
+              onClick={this.clickToPlay(item.rid, index)}
+            >
               <div className="flex_c list_item">
                 <div className="list_idx">{index + 1}</div>
                 <div className="song_name">
@@ -135,7 +196,6 @@ class Playcontrol extends Component {
         <div className="playControl_inn">
           <div className="control_out">
             {/* <div className="lock">
-
               </div> */}
             <div className="posi_re">
               {/* 控制条 */}
@@ -161,7 +221,7 @@ class Playcontrol extends Component {
                       </div>
                       {/* 时间 */}
                       <span className="time">
-                        00:00/{musicInfo.songTimeMinutes}
+                        {songCurrentTime}/{musicInfo.songTimeMinutes}
                       </span>
                       {/* 进度条 */}
                     </div>
@@ -178,7 +238,10 @@ class Playcontrol extends Component {
                 </div>
                 {/* 中间 */}
                 <div className=" col_c flex_c">
-                  <StepBackwardOutlined className="prev" />
+                  <StepBackwardOutlined
+                    className="prev"
+                    onClick={this.playPrevOrNext("prev")}
+                  />
                   <PlayCircleOutlined
                     className="play"
                     style={{ display: isplay ? "none" : "block" }}
@@ -189,7 +252,10 @@ class Playcontrol extends Component {
                     className="play"
                     onClick={this.playAudio(false)}
                   />
-                  <StepForwardOutlined className="next" />
+                  <StepForwardOutlined
+                    className="next"
+                    onClick={this.playPrevOrNext("next")}
+                  />
                 </div>
                 {/* 右边 */}
                 <div className="col_r flex_c">
