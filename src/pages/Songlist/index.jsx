@@ -23,6 +23,7 @@ class Songlist extends Component {
     tags: [], //存放标签
     isShow: false, //显示隐藏tag区域
     tag_title: "精选歌单",
+    isPlay: false, //音乐播放
   };
   async componentDidMount() {
     //开始默认渲染最热歌单数据，每页10条数，默认显示第一页
@@ -104,6 +105,23 @@ class Songlist extends Component {
       tag_title: "精选歌单",
       isShow: false,
     });
+  };
+
+  //点击播放音乐
+  play = () => {
+    const audioDom = this.refs.audio;
+    const { isPlay } = this.state;
+    if (!isPlay) {
+      audioDom.play();
+      this.setState({
+        isPlay: true,
+      });
+    } else {
+      audioDom.pause();
+      this.setState({
+        isPlay: false,
+      });
+    }
   };
 
   render() {
@@ -230,7 +248,7 @@ class Songlist extends Component {
               {/* 主体歌单部分 */}
               <div className="rec_list">
                 {songList.map((song) => {
-                  return <Item {...song} key={song.id} />;
+                  return <Item {...song} key={song.id} play={this.play} />;
                 })}
               </div>
             </div>
@@ -249,6 +267,11 @@ class Songlist extends Component {
 
         {/* 底部 */}
         <div className="footer"></div>
+
+        <audio
+          src="http://win.web.nf03.sycdn.kuwo.cn/ee63770fe17cf0269c811197ac35ebb2/5fbb4fd9/resource/m1/83/31/2636392037.mp4"
+          ref="audio"
+        ></audio>
       </div>
     );
   }
