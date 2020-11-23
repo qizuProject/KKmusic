@@ -7,5 +7,10 @@ export const reqMusicInfo = (mid) => {
 
 // 歌曲播放链接
 export const reqMusicPlayUrl = (mid) => {
-  return request.get(`/url?rid=${mid}`)
-}
+  return request.get(`/url?rid=${mid}`);
+};
+
+// 歌曲歌词
+export const reqMusicLrcList = (mid) => {
+  return request.get(`/lrc?musicId=${mid}`);
+};

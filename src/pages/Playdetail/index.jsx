@@ -12,7 +12,7 @@ import {
 import "./index.css";
 import Playcontrol from "@comps/Palycontrol";
 // 引入请求函数
-import { reqMusicInfo } from "@api/palydetail";
+import { reqMusicInfo, reqMusicLrcList } from "@api/palydetail";
 // 评论组件
 import Commenet from "@comps/comment";
 export default class Playdetail extends Component {
@@ -20,6 +20,8 @@ export default class Playdetail extends Component {
     current: 1,
     musicInfo: {}, // 歌曲详情
     mid: "156499973", // 歌曲id
+    musicLrcList: [], // 歌词数组
+    islrcList: false, // 控制是否有歌词
   };
   onChange = (page) => {
     console.log(page);
@@ -30,7 +32,7 @@ export default class Playdetail extends Component {
   async componentDidMount() {
     try {
       // 发送请求 获取歌曲详情信息
-      let musicInfo = await reqMusicInfo("156499973");
+      let musicInfo = await reqMusicInfo("151728901");
       // 更新数据
       this.setState({
         musicInfo: musicInfo.data,
@@ -39,8 +41,20 @@ export default class Playdetail extends Component {
       console.log(error);
     }
   }
+
+  async componentDidUpdate() {
+    // 获取歌词
+    let musicLrcList = await reqMusicLrcList("151728901");
+    if (musicLrcList.data) {
+      this.setState({
+        islrcList: true,
+        musicLrcList: musicLrcList.data.lrclist,
+      });
+    }
+  }
   render() {
-    const { musicInfo } = this.state;
+    const { musicInfo, islrcList, musicLrcList } = this.state;
+    // console.log(islrcList);
     return (
       <>
         <div className="container">
@@ -147,8 +161,13 @@ export default class Playdetail extends Component {
                       className="lyric"
                       style={{ maxHeight: "429px" }}
                     >
-                      <div>
+                      <div style={{ display: islrcList ? "none" : "block" }}>
                         <p>暂无歌词</p>
+                      </div>
+                      <div style={{ display: islrcList ? "block" : "none" }}>
+                        {musicLrcList.map((item, index) => {
+                          return <p>{item.lineLyric}</p>;
+                        })}
                       </div>
                     </div>
                     {/* 有歌词 */}

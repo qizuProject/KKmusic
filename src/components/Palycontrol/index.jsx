@@ -26,7 +26,7 @@ class Playcontrol extends Component {
     musicInfo: [],
     currentIndex: null, // 当前播放歌曲的索引
     playlist: [],
-    songCurrentTime: null, // 歌曲当前播放的时间
+    songCurrentTime: "00:00", // 歌曲当前播放的时间
   };
   audioRef = React.createRef();
   // 触发滚动条
@@ -52,7 +52,7 @@ class Playcontrol extends Component {
     this.audioRef.current.volume = value / 100;
   };
   // 请求音乐信息
-  getmusicinfo = async (mid = "156499973") => {
+  getmusicinfo = async (mid = "151728901") => {
     // 发送请求 获取歌曲详情信息
     let musicInfo = await reqMusicInfo(mid);
     this.setState({
@@ -76,10 +76,9 @@ class Playcontrol extends Component {
           (this.audioRef.current.currentTime / this.audioRef.current.duration) *
           100,
         songCurrentTime: moment(
-          String(this.audioRef.current.currentTime)
-        ).format("mm:ss"),
+          Math.ceil(this.audioRef.current.currentTime * 1000)
+        ).format("mm:ss"), // 当前歌曲播放的时间
       });
-      console.log(this.audioRef.current.currentTime.toString());
     };
   }
   // 点击切换播放/暂停音乐
@@ -296,7 +295,7 @@ class Playcontrol extends Component {
           <audio
             ref={this.audioRef}
             autoPlay="autoplay"
-            src="https://ex-sycdn.kuwo.cn/745801553bc3f4a3631df5cd2566c834/5fbb0d13/resource/n1/50/53/1833251662.mp3"
+            src="https://gd-sycdn.kuwo.cn/0e6b3fb59a9965451d2d7012e305596a/5fbb91ff/resource/n2/61/99/3768904681.mp3"
           ></audio>
         </div>
       </div>
