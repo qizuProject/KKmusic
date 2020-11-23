@@ -23,6 +23,7 @@ class Playcontrol extends Component {
   state = {
     isplay: false, // 控制播放图标
     currentAduioTime: 0, // 进度条位置
+    currentSongTime: 0, // 当前歌曲播放的时间位置
     musicInfo: [],
     currentIndex: null, // 当前播放歌曲的索引
     playlist: [],
@@ -38,6 +39,7 @@ class Playcontrol extends Component {
     // 改变进度条的位置
     this.setState({
       currentAduioTime: this.audioRef.current.currentTime,
+      // currentSongTime: this.audioRef.current.currentTime,
     });
   };
   // 移入显示
@@ -82,7 +84,7 @@ class Playcontrol extends Component {
       });
 
       // 触发父组件playdetail 的事件 将当前歌曲的播放时间 传过去
-      this.props.timeUpdate(this.audioRef.current.currentTime);
+      this.props.timeUpdate(this.audioRef.current, this.state.currentAduioTime);
     };
   }
   // 点击切换播放/暂停音乐

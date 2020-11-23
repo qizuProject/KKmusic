@@ -26,11 +26,13 @@ export default class Playdetail extends Component {
     currentLyc: 0, // 当前歌词
     lycStyle: {}, // 歌词滚动样式
   };
+  aduioSliderRef = React.createRef();
   // 监听歌曲播放位置发生改变时触发
-  timeUpdate = (targetTime) => {
+  timeUpdate = (target, a) => {
     // 获取audio当前播放时间
-    let currentTime = targetTime;
+    let currentTime = target.currentTime;
     let { currentLyc, musicLrcList } = this.state;
+    console.log(currentLyc, musicLrcList);
     for (let i = currentLyc; i < musicLrcList.length; i++) {
       // 下一句有歌词  当前歌词的时间 大于前一句的时间  小于下一句的时间
       if (
@@ -44,7 +46,11 @@ export default class Playdetail extends Component {
             transform: `translateY(-${2.145 * i}rem)`,
           },
         });
+        return;
       }
+      this.setState({
+        currentLyc: Math.floor((a / 100) * musicLrcList.length),
+      });
     }
   };
 
@@ -84,7 +90,6 @@ export default class Playdetail extends Component {
       lycStyle,
       currentLyc,
     } = this.state;
-    // console.log(islrcList);
     return (
       <>
         <div className="container">
@@ -195,6 +200,7 @@ export default class Playdetail extends Component {
                         <p>暂无歌词</p>
                       </div>
                       <div
+                        ref={this.aduioSliderRef}
                         style={{
                           display: islrcList ? "block" : "none",
                           ...lycStyle,
