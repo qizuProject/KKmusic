@@ -22,7 +22,34 @@ export default class Playdetail extends Component {
     mid: "156499973", // 歌曲id
     musicLrcList: [], // 歌词数组
     islrcList: false, // 控制是否有歌词
+    currentTime: "", // 歌曲当前播放时间
+    currentLyc: 0, // 当前歌词
+    lycStyle: {}, // 歌词滚动样式
   };
+  // 监听歌曲播放位置发生改变时触发
+  timeUpdate = (targetTime) => {
+    // 获取audio当前播放时间
+    let currentTime = targetTime;
+    let { currentLyc, musicLrcList } = this.state;
+    for (let i = currentLyc; i < musicLrcList.length; i++) {
+      // 下一句有歌词  当前歌词的时间 大于前一句的时间  小于下一句的时间
+      if (
+        musicLrcList[i + 1] &&
+        currentTime < musicLrcList[i + 1]["time"] &&
+        currentTime > musicLrcList[i]["time"]
+      ) {
+        this.setState({
+          currentLyc: i,
+          lycStyle: {
+            transform: `translateY(-${2.145 * i}rem)`,
+          },
+        });
+      }else{
+
+      }
+    }
+  };
+
   onChange = (page) => {
     console.log(page);
     this.setState({
@@ -53,7 +80,13 @@ export default class Playdetail extends Component {
     }
   }
   render() {
-    const { musicInfo, islrcList, musicLrcList } = this.state;
+    const {
+      musicInfo,
+      islrcList,
+      musicLrcList,
+      lycStyle,
+      currentLyc,
+    } = this.state;
     // console.log(islrcList);
     return (
       <>
@@ -164,18 +197,30 @@ export default class Playdetail extends Component {
                       <div style={{ display: islrcList ? "none" : "block" }}>
                         <p>暂无歌词</p>
                       </div>
-                      <div style={{ display: islrcList ? "block" : "none" }}>
+                      <div
+                        style={{ display: islrcList ? "block" : "none" }}
+                        style={lycStyle}
+                      >
                         {musicLrcList.map((item, index) => {
-                          return <p>{item.lineLyric}</p>;
+                          return (
+                            <p
+                              key={item.time}
+                              style={
+                                currentLyc === index ? { color: "red" } : {}
+                              }
+                            >
+                              {item.lineLyric}
+                            </p>
+                          );
                         })}
                       </div>
                     </div>
                     {/* 有歌词 */}
-                    <div className="loading-mask" style={{ display: "none" }}>
+                    <div className="loading-mask">
                       <div className="loading-wrap">
-                        <div className="load ">....歌词区域</div>
+                        <div className="load "></div>
                       </div>
-                      <div className="down" style={{ display: "none" }}>
+                      <div className="down">
                         <span>
                           展开
                           <DownOutlined className="iconfont"></DownOutlined>
@@ -194,7 +239,7 @@ export default class Playdetail extends Component {
               </div>
             </div>
           </div>
-          <Playcontrol></Playcontrol>
+          <Playcontrol timeUpdate={this.timeUpdate}></Playcontrol>
         </div>
       </>
     );

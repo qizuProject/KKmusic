@@ -79,6 +79,9 @@ class Playcontrol extends Component {
           Math.ceil(this.audioRef.current.currentTime * 1000)
         ).format("mm:ss"), // 当前歌曲播放的时间
       });
+
+      // 触发父组件playdetail 的事件 将当前歌曲的播放时间 传过去
+      this.props.timeUpdate(this.audioRef.current.currentTime);
     };
   }
   // 点击切换播放/暂停音乐
@@ -147,7 +150,7 @@ class Playcontrol extends Component {
     // 歌单
     const { playList } = this.props;
     const { isplay, currentAduioTime, musicInfo, songCurrentTime } = this.state;
-    // console.log(songCurrentTime);
+    // console.log(this.props.timeUpdate); // 父组件传递过来的函数
     // 高品质
     const content = (
       <div>
