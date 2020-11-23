@@ -1,32 +1,47 @@
 import React, { Component } from "react";
-
+import { NavLink, Switch, Route, Redirect } from "react-router-dom";
+import Header from "@comps/Header";
+import Recommend from "@pages/Recommend";
 import "./index.css";
+import { Menu } from "antd";
 
-export default class index extends Component {
+export default class Home extends Component {
+  state = {
+    currentMeun: "currentMeun",
+  };
   render() {
+    const { currentMeun } = this.state;
     return (
       <>
-        <div className="home-container">
-          <div className="home-banner-nav">
-            <Tabs defaultActiveKey="1" onChange={callback}>
-              <TabPane tab="Tab 1" key="1">
-                推荐
-              </TabPane>
-              <TabPane tab="Tab 2" key="2">
-                排行榜
-              </TabPane>
-              <TabPane tab="Tab 3" key="3">
-                歌单
-              </TabPane>
-              <TabPane tab="Tab 3" key="3">
-                歌手
-              </TabPane>
-              <TabPane tab="Tab 3" key="3">
-                MV
-              </TabPane>
-            </Tabs>
-          </div>
+        <div className="home-nav">
+          <Menu defaultSelectedKeys={[currentMeun]} mode="horizontal">
+            <Menu.Item key={currentMeun}>
+              <NavLink to="/recommend">推荐</NavLink>
+            </Menu.Item>
+            <Menu.Item>
+              <NavLink to="/header">排行</NavLink>
+            </Menu.Item>
+            <Menu.Item>
+              <NavLink to="/">歌手</NavLink>
+            </Menu.Item>
+            <Menu.Item>
+              <NavLink to="/">歌单</NavLink>
+            </Menu.Item>
+            <Menu.Item>
+              <NavLink to="/">MV</NavLink>
+            </Menu.Item>
+          </Menu>
         </div>
+        <Switch>
+          <Route path="/header" component={Header} />
+          <Route
+            path="/"
+            component={Recommend}
+            render={() =>
+            <Redirect to="/recommend" />
+            }
+          />
+        </Switch>
       </>
     );
   }
