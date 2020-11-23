@@ -96,6 +96,16 @@ class Songlist extends Component {
     this.setState({ upOrDown: !upOrDown, isShow: !isShow });
   };
 
+  //点击精选歌单
+  defaultList = async () => {
+    await this.props.newOrHotPlayListAsync("new", 10, 1);
+    this.setState({
+      songList: this.props.songList,
+      tag_title: "精选歌单",
+      isShow: false,
+    });
+  };
+
   render() {
     const {
       songList,
@@ -172,7 +182,9 @@ class Songlist extends Component {
                       </div>
 
                       {/* 精选歌单 */}
-                      <span className="list_tag">精选歌单</span>
+                      <span className="list_tag" onClick={this.defaultList}>
+                        精选歌单
+                      </span>
 
                       {/* 内容区域 */}
                       <div className="content">
