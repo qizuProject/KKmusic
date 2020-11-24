@@ -98,7 +98,11 @@ export default class Recommend extends Component {
       singerList: singerList.artistList,
     });
   };
-  
+  toPlayDetail=(rid)=>{
+    return ()=>{
+        this.props.history.push('/playdetail',{rid:rid})
+    }
+  }
   render() {
     const {
       playList,
@@ -218,7 +222,7 @@ export default class Recommend extends Component {
                   <img className="home-list-img" src={item.pic} alt="" />
                   {item.musicList.slice(0, 5).map((music, index) => {
                     return (
-                      <li key={music.rid}>
+                      <li key={music.rid} onClick = {this.toPlayDetail(music.rid)}>
                         <span>{index + 1}</span>
                         {music.name}
                         <p>{music.artist}</p>
