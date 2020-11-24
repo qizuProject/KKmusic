@@ -126,7 +126,6 @@ export default class Playdetail extends Component {
                 {/* 歌曲信息 */}
                 {/* 上部分 */}
                 <div>
-                  {/* <h1 style={{ display: "block" }}>入了心的人</h1> */}
                   <p className="song_name flex_c">
                     <span className="name">{musicInfo.name}</span>
                   </p>
