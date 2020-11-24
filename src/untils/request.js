@@ -19,8 +19,8 @@ request.interceptors.request.use((config) => {
 request.interceptors.response.use(
   //响应成功
   (response) => {
-    if (response.data.code) {
-      return response.data.data;
+    if (response.data.code === 200) {
+      return response.data;
     } else {
       return Promise.reject(response.data.message);
     }

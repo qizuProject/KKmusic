@@ -1,0 +1,64 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.Mv {
+  width: 1080px;
+  margin: 0 auto;
+  color: #333;
+}
+.nav {
+  display: flex;
+  margin-top: 22px;
+  margin-bottom: 48px;
+}
+.nav li {
+  padding: 7px 14px;
+  text-align: center;
+  border-radius: 14px;
+  cursor: pointer;
+}
+.active {
+  background: #ffe443;
+  font-weight: 700;
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: -26px;
+}
+.content .list {
+  width: 18.85%;
+  margin-right: 1.42%;
+  margin-bottom: 0px;
+}
+.content .list .cover {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding-bottom: 59%;
+}
+.content .list .name {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 25px;
+  margin-top: -230px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.content .list .time {
+  color: #999;
+  font-weight: 300;
+  margin-top: -15px;
+  margin-bottom: 26px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.pagination {
+  margin-top: 20px;
+  margin-left: 290px;
+}
