@@ -11,7 +11,7 @@ export const playListTags = (data) => ({ type: TAG, data: data });
 export const newOrHotPlayListAsync = (order, rn, pn) => {
   return async (dispatch) => {
     const result = await reqDefaultPlayList(order, rn, pn);
-    const data = result.data.map((item) => {
+    const data = result.data.data.map((item) => {
       return {
         img: item.img,
         title: item.name,
@@ -33,7 +33,7 @@ export const newOrHotPlayListAsync = (order, rn, pn) => {
 export const tags = () => {
   return async (dispatch) => {
     let result = await reqTags();
-    const tags = result.map((item) => {
+    const tags = result.data.map((item) => {
       return {
         type_id: item.id,
         type: item.name,

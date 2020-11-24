@@ -22,3 +22,13 @@ export const reqTags = () => {
 export const reqPlayListById = (id) => {
   return request.get(`/playList/category?id=${id}`);
 };
+
+//请求歌单音乐
+export const reqMusicList = (pid) => {
+  return request.get(`/musicList?pid=${pid}`);
+};
+
+//请求播放链接
+export const reqPlayUrl = (rid) => {
+  return request.get(`/url?rid=${rid}`);
+};

@@ -7,13 +7,13 @@ import { connect } from "react-redux";
 import { newOrHotPlayListAsync, tags } from "@redux/actions";
 import { Pagination, Tag } from "antd";
 import { reqPlayListById } from "@api/songlist";
+import { reqMusicList } from "@api/songlist";
 import {
   DownOutlined,
   UpOutlined,
   BookOutlined,
   AppstoreOutlined,
 } from "@ant-design/icons";
-
 class Songlist extends Component {
   state = {
     songList: [], //歌单数组
@@ -24,6 +24,8 @@ class Songlist extends Component {
     isShow: false, //显示隐藏tag区域
     tag_title: "精选歌单",
     isPlay: false, //音乐播放
+    tagIndex: -1,
+    index: -1,
   };
   async componentDidMount() {
     //开始默认渲染最热歌单数据，每页10条数，默认显示第一页
@@ -70,10 +72,10 @@ class Songlist extends Component {
   };
 
   //点击tag
-  changeList = (id, name) => {
+  changeList = (id, name, tagIndex, index) => {
     return async () => {
       const result = await reqPlayListById(id);
-      const data = result.data.map((item) => {
+      const data = result.data.data.map((item) => {
         return {
           img: item.img,
           title: item.name,
@@ -86,6 +88,9 @@ class Songlist extends Component {
         isShow: !this.state.isShow,
         tag_title: name,
         upOrDown: !this.state.upOrDown,
+        tagIndex,
+        index,
+        defaultFlag: false,
       });
     };
   };
@@ -93,7 +98,9 @@ class Songlist extends Component {
   //点击icon，切换并显示隐藏tag区域
   changeIcon = () => {
     //切换icon,显示隐藏tag区域
-    const { upOrDown, isShow } = this.state;
+    const { upOrDown, isShow, tagIndex, index } = this.state;
+    console.log(tagIndex, index);
+
     this.setState({ upOrDown: !upOrDown, isShow: !isShow });
   };
 
@@ -133,7 +140,10 @@ class Songlist extends Component {
       tags,
       isShow,
       tag_title,
+      tagIndex,
+      index,
     } = this.state;
+
     return (
       <div className="songlist_page">
         {/* 头部 */}
@@ -206,7 +216,7 @@ class Songlist extends Component {
 
                       {/* 内容区域 */}
                       <div className="content">
-                        {tags.map((tag) => {
+                        {tags.map((tag, cIndex) => {
                           return (
                             <div key={tag.type_id}>
                               <div className="tag_header">
@@ -215,15 +225,22 @@ class Songlist extends Component {
                               </div>
 
                               <div className="tag_content">
-                                {tag.data.map((item) => {
+                                {tag.data.map((item, pindex) => {
                                   return (
                                     <Tag
+                                      className={
+                                        (tagIndex === cIndex && index === pindex
+                                          ? "list_tag"
+                                          : "",
+                                        "single_tag")
+                                      }
                                       color="#f7f7f7"
-                                      className="single_tag"
                                       key={item.tag_id}
                                       onClick={this.changeList(
                                         item.tag_id,
-                                        item.name
+                                        item.name,
+                                        cIndex,
+                                        pindex
                                       )}
                                     >
                                       {item.name}
@@ -269,7 +286,7 @@ class Songlist extends Component {
         <div className="footer"></div>
 
         <audio
-          src="http://win.web.nf03.sycdn.kuwo.cn/ee63770fe17cf0269c811197ac35ebb2/5fbb4fd9/resource/m1/83/31/2636392037.mp4"
+          src="https://su-sycdn.kuwo.cn/624a07052b1181d13db5b40b644b3dd1/5fbbe70e/resource/n3/43/27/748538076.mp3"
           ref="audio"
         ></audio>
       </div>

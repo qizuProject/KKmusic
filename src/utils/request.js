@@ -20,7 +20,7 @@ request.interceptors.response.use(
   //响应成功
   (response) => {
     if (response.data.code) {
-      return response.data.data;
+      return response.data;
     } else {
       return Promise.reject(response.data.message);
     }
