@@ -1,0 +1,239 @@
+.playControl {
+  position: fixed;
+  left: 0;
+  /* bottom: -70px; */
+  bottom: 0;
+  z-index: 11000;
+  padding-top: 20px;
+  height: 90px;
+  width: 100%;
+}
+.playControl.nolock {
+  transition: bottom 0.8s ease-out;
+}
+.playControl .playControl_inn {
+  background: #fff;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+}
+.playControl .control_out {
+  position: relative;
+  max-width: 1340px;
+  padding: 0 120px;
+  margin: 0 auto;
+  background: #fff;
+}
+.posi_re {
+  position: relative;
+}
+.playControl .control .con_l {
+  flex-shrink: 0;
+  position: relative;
+  width: 460px;
+  margin-right: 40px;
+}
+.flex_c {
+  display: flex;
+  align-items: center;
+}
+
+.playControl .control {
+  position: relative;
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+}
+/* .playControl .control .con_l .cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 101;
+} */
+.playControl .song_img {
+  margin-right: 20px;
+  width: 50px;
+  height: 50px;
+}
+
+.playControl .control .con_l .info_con {
+  width: 370px;
+  justify-content: space-between;
+  margin-bottom: 11px;
+}
+.playControl .control .con_l .info_con .info {
+  width: 290px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.con_l .info_con .song_name {
+  display: inline-block;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.playControl .control .con_l .info_con .artist {
+  max-width: 31.63%;
+  color: #666;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.playControl .control .con_l .info_con .time {
+  color: #999;
+}
+/* .ant-slider-track {
+  background: #ffdf1f;
+  border: #ffdf1f;
+  height: 3px;
+  border-radius: 2px;
+} */
+/* 中间 */
+.playControl .control .col_c .next,
+.playControl .control .prev {
+  width: 28px;
+  text-align: center;
+  cursor: pointer;
+  display: block;
+  font-size: 18px;
+  padding-left: 10px;
+}
+.playControl .control .col_c .play {
+  width: 46px;
+  text-align: center;
+  cursor: pointer;
+  margin: 0 31px;
+  font-size: 40px;
+  display: block;
+}
+.playControl .control .col_c .next {
+  width: 28px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* 右边 */
+.playControl .control .col_r {
+  display: flex;
+  justify-content: flex-end;
+  width: 460px;
+  color: #666;
+  flex-shrink: 0;
+  justify-content: space-around;
+}
+.playControl .control .col_r .song_type {
+  /* position: relative; */
+  flex-shrink: 0;
+  width: 58px;
+  height: 24px;
+  line-height: 16px;
+  text-align: center;
+  border-radius: 13px;
+  margin-left: 31px;
+  font-size: 12px;
+  border: 1px solid #666;
+}
+.aduioTwo {
+  position: relative;
+  display: flex;
+  width: 86px;
+  justify-content: flex-start;
+  align-items: center;
+}
+.aduioTwo span {
+  display: block;
+}
+
+.playControl .control .progress {
+  width: 380px;
+  /* z-index: 20000; */
+}
+/* .playControl .control .progress_bar {
+  position: relative;
+  width: 100%;
+  height: 3px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 2px;
+  cursor: pointer;
+} */
+#components-dropdown-demo-placement .ant-btn {
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+.ant-row-rtl #components-dropdown-demo-placement .ant-btn {
+  margin-right: 0;
+  margin-bottom: 8px;
+  margin-left: 8px;
+}
+/* 歌单框 */
+.list_con {
+  max-height: 414px;
+  overflow: hidden;
+  /* margin-top: 20px; */
+  overflow-y: auto;
+}
+#ant-dropdown-menu {
+  position: fixed;
+  bottom: 70px;
+  margin: 0;
+  left: 40vw;
+  width: 400px;
+  /* padding: 0 25px; */
+  text-align: left;
+  list-style-type: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border-radius: 2px;
+  outline: none;
+  background-color: rgb(253, 248, 248);
+  -webkit-box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12),
+    0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12);
+}
+.list_con .list_item {
+  height: 46px;
+  padding: 0 25px;
+}
+.list_con .list_item .list_idx {
+  position: relative;
+  width: 16px;
+  height: 20px;
+  text-align: center;
+  margin-right: 8px;
+  line-height: 20px;
+}
+.list_con .list_item .song_name {
+  width: 198px;
+  height: 20px;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 20px;
+  margin-right: 22px;
+}
+.list_con .list_item .artist {
+  width: 163px;
+  height: 20px;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 20px;
+}
+.list_con .list_item .time {
+  margin-left: 16px;
+  height: 16px;
+  line-height: 16px;
+  font-weight: 600;
+}
+.song_opts {
+  justify-content: space-between;
+  width: 280px;
+}

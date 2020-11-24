@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 // 引入图标
-import {
-  RightOutlined,
-} from "@ant-design/icons";
+import { RightOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
 import "./index.css";
- import Banner from '@pages/Recommend/Banner';
+import Banner from "@pages/Recommend/Banner";
 import {
   reqPlayListTags,
   reqPlayListById,
@@ -33,7 +31,7 @@ export default class Recommend extends Component {
     current: true,
     currentMeun: "currentMeun",
   };
-  
+
   async componentDidMount() {
     // 获取分类导航数量
     const songTags = await reqPlayListTags();
@@ -59,7 +57,7 @@ export default class Recommend extends Component {
   getRecommendSong = async () => {
     const recommendSong = await reqRecommend();
     const useRecommendSong = recommendSong.data.data.slice(0, 5);
-    
+
     this.setState({
       useRecommendSong,
       current: true,
@@ -96,14 +94,14 @@ export default class Recommend extends Component {
     // 获取歌手分类导航数据
     const singerList = await reqRecSinger(categoryId);
     this.setState({
-      singerList: singerList.artistList,
+      singerList: singerList.data.artistList,
     });
   };
-  toPlayDetail=(rid)=>{
-    return ()=>{
-        this.props.history.push('/playdetail',{rid:rid})
-    }
-  }
+  toPlayDetail = (rid) => {
+    return () => {
+      this.props.history.push("/playdetail", { rid: rid });
+    };
+  };
   render() {
     const {
       playList,
@@ -170,7 +168,6 @@ export default class Recommend extends Component {
                         src={item.img}
                         alt=""
                       />
-                      
                     </div>
                   </div>
                   <p className="name">
@@ -223,7 +220,10 @@ export default class Recommend extends Component {
                   <img className="home-list-img" src={item.pic} alt="" />
                   {item.musicList.slice(0, 5).map((music, index) => {
                     return (
-                      <li key={music.rid} onClick = {this.toPlayDetail(music.rid)}>
+                      <li
+                        key={music.rid}
+                        onClick={this.toPlayDetail(music.rid)}
+                      >
                         <span>{index + 1}</span>
                         {music.name}
                         <p>{music.artist}</p>

@@ -1,0 +1,266 @@
+.container {
+  min-width: 1080px;
+  max-width: 1340px;
+  padding: 0 120px;
+  margin: 0 auto;
+}
+.main_con .content {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+/* 左边 */
+.main_con .content .info_l {
+  width: 22.5%;
+  margin-top: 47px;
+}
+.main_con .content .info_l .cover_out {
+  position: relative;
+  width: 100%;
+  margin-bottom: 40px;
+  margin-right: 103px;
+  font-size: 0;
+}
+.main_con .content .info_l .cover_out .cover {
+  width: 100%;
+  height: 100%;
+}
+.info_l .cover_out .intr {
+  margin-top: 40px;
+  margin-bottom: 10px;
+  font-size: 22px;
+  font-weight: 600;
+  height: 30px;
+  line-height: 30px;
+}
+.info_l .cover_out .intr_txt {
+  width: 100%;
+  font-size: 14px;
+  color: #666;
+  line-height: 21px;
+  word-break: break-all;
+}
+.info_l .cover_out .download {
+  display: block;
+  width: 202px;
+  height: 44px;
+  margin: 30px auto 0;
+  text-align: center;
+  line-height: 44px;
+  box-shadow: 0 4px 10px 0 rgba(255, 223, 31, 0.3);
+  border-radius: 27px;
+  color: #333;
+  border: none;
+}
+.info_l .cover_out .bg_primary {
+  background: #ffe12c;
+}
+/* 二维码 */
+.qrcode-container {
+  margin: 36px 0;
+  border-top: 1px solid #efefef;
+  text-align: center;
+}
+
+.qrcode-container img {
+  margin: 36px 0 18px;
+  width: 168px;
+  height: 168px;
+}
+.qrcode-container p {
+  font-size: 16px;
+  font-family: PingFangSC-Light;
+  font-weight: 300;
+  color: #666;
+  line-height: 21px;
+}
+
+/* 右边内容 */
+.main_con .info_r {
+  width: 70%;
+  margin-top: 63px;
+}
+.main_con .info_r div h1 {
+  font-size: 2em;
+}
+.main_con .info_r .song_name {
+  flex-wrap: wrap;
+}
+.flex_c {
+  display: flex;
+  align-items: center;
+}
+.main_con .info_r .song_info {
+  margin-top: 16px;
+  height: 20px;
+  font-weight: 400;
+  color: #999;
+  line-height: 20px;
+}
+.main_con .info_r .song_name .name {
+  word-break: break-all;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 42px;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+.main_con .info_r .song_info span {
+  display: inline-block;
+  overflow: hidden;
+}
+.song_info .tip {
+  margin-right: 40px;
+  color: #333;
+}
+
+.main_con .info_r .song_info .album_name {
+  max-width: 60%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+/* 按钮 */
+.main_con .info_r .btns {
+  display: flex;
+}
+.main_con .info_r .btns .play {
+  width: 150px;
+  background: #ffe12c;
+  border: none;
+}
+.main_con .info_r .btns .bg_primary {
+  width: 150px;
+  border: none;
+  background: #ffe12c;
+  color: #333;
+}
+.main_con .info_r .btns button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 28px;
+  height: 40px;
+  margin-right: 10px;
+  text-align: center;
+  border-radius: 22px;
+  border: none;
+  font-size: 16px;
+  background: #f2f2f2;
+  cursor: pointer;
+  color: inherit;
+}
+/* 歌词 */
+.main_con .info_r .lyric {
+  position: relative;
+  min-height: 150px;
+  overflow: hidden;
+  margin-top: 48px;
+  line-height: 24px;
+  color: #666;
+}
+.loading-mask {
+  /* position: absolute; */
+  z-index: 10000;
+  background-color: #fff;
+  margin: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  min-height: 100px;
+  transition: opacity 0.3s;
+  display: flex;
+  justify-content: center;
+}
+.loading-wrap {
+  /* position: absolute; */
+  top: 10%;
+  left: 0;
+  right: 0;
+}
+.loading-wrap .load {
+  height: 22px;
+  line-height: 22px;
+  text-align: center;
+}
+.info_r .down {
+  color: #296294;
+  margin-top: 5px;
+  line-height: 20px;
+  cursor: pointer;
+}
+.info_r .icon {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+}
+/* 评论区域 */
+.comment_con{
+  margin-top: 48px;
+}
+.comment_con .all-comment {
+  margin-top: 30px;
+}
+.comment_con .type {
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: 600;
+  margin-bottom: 22px;
+}
+.comment_con .type .comment-num {
+  margin-left: 8px;
+  font-weight: 300;
+  font-size: 14px;
+}
+.comment_con .all-comment .each-comment {
+  display: flex;
+  margin: 16px 0 20px;
+}
+.comment_con .all-comment .each-comment .each-comment-msg {
+  flex: 1;
+  position: relative;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f2f2f2;
+}
+.comment_con .all-comment .each-comment .each-comment-msg .each-comment-content {
+  font-size: 14px;
+  line-height: 26px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+.comment_con .all-comment .each-comment .each-comment-msg .each-comment-time {
+  height: 17px;
+  line-height: 17px;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  opacity: .8;
+  margin-top: 5px;
+}
+.comment_con .all-comment .each-comment .each-comment-avatar {
+  height: 80px;
+  margin-right: 14px;
+}
+.comment_con .all-comment .each-comment .each-comment-avatar img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  margin-top: 3px;
+}
+.comment_con .all-comment .each-comment .each-comment-msg .each-comment-time {
+  height: 17px;
+  line-height: 17px;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  opacity: .8;
+  margin-top: 5px;
+}
+
+
