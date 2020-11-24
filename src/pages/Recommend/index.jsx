@@ -4,7 +4,7 @@ import {
   RightOutlined,
 } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
-// import "./index.css";
+import "./index.css";
  import Banner from '@pages/Recommend/Banner';
 import {
   reqPlayListTags,
@@ -74,7 +74,7 @@ export default class Recommend extends Component {
       // 总歌单数据
       const songList = await reqPlayListById(id);
       // 使用的歌单数据
-      const useRecommendSong = songList.data.slice(0, 5);
+      const useRecommendSong = songList.data.data.slice(0, 5);
       this.setState({
         useRecommendSong,
         currentIndex: index,

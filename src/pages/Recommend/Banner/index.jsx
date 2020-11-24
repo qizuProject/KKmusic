@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import Swiper from "swiper/js/swiper.min";
 // 引入swiper样式
 import "swiper/css/swiper.min.css";
+import './index.css';
 // 引入图标
 import {
   WindowsOutlined,

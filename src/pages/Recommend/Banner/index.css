@@ -1,0 +1,151 @@
+
+.home-container {
+  width: 1200px;
+  margin: 0 auto;
+}
+.home-nav {
+  margin-left: 230px;
+
+}
+.home-swiper-banner{
+  margin-top: 30px;
+}
+.home-banner-btn {
+  display: flex;
+  justify-content: space-around;
+}
+.home-banner-download {
+  background-color: #bccfed;
+  height: 50px;
+  line-height: 50px;
+}
+.home-banner-btn a {
+  color: #fff;
+  font-size: 16px;
+}
+.home-banner-btn a i {
+  font-size: 20px;
+}
+.home-banner-btn a span {
+  padding-left: 15px;
+}
+.home-day-recommend-nav {
+  margin-top: 50px;
+  display: flex;
+}
+.home-day-recommend-select {
+  display: flex;
+}
+.home-day-recommend-font {
+  height: 30px;
+  line-height: 30px;
+  color: #999999;
+}
+.home-day-recmmend-ul {
+  display: flex;
+}
+.home-day-recmmend-ul a {
+  position: relative;
+  display: inline-block;
+  height: 30px;
+  line-height: 50px;
+  margin-right: 34px;
+  font-weight: 300;
+  color: #333;
+}
+.home-day-recommend-a{
+  margin-left: 20px;
+}
+.RecommendActive{
+  border-bottom: 3px solid #FFE443;
+  font-weight: bold;
+}
+
+.home-day-recomment-img {
+  width: 200px;
+  height: 200px;
+}
+.home-day-recommend {
+  margin-top: 30px;
+}
+.home-day-recomment-btn {
+  display: flex;
+  justify-content: space-between;
+}
+.home-origin {
+  margin-top: 50px;
+}
+.act_out {
+  display: flex;
+  justify-content: space-between;
+}
+.act img {
+  width: 590px;
+}
+.home-list-nav {
+  display: flex;
+}
+.home-list-nav p {
+  margin-top: 68px;
+  margin-left: 20px;
+  color: #999999;
+}
+.home-list-title {
+  margin-top: 50px;
+}
+.home-list {
+  margin-top: -15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.name {
+  width: 200px;
+}
+.home-list-img {
+  width: 200px;
+  height: 200px;
+}
+.home-list-song {
+  width: 200px;
+}
+.home-list li {
+  margin-top: 20px;
+  font-weight: bold;
+  margin-left: 35px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.home-list li span {
+  margin-right: 10px;
+}
+.home-list li p {
+  margin-left: 20px;
+}
+
+.home-list-song {
+  margin-top: 20px;
+}
+.home-songer-list {
+  display: flex;
+}
+.home-songer-ul {
+  display: flex;
+}
+.home-songer-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+.home-songer-select {
+  display: flex;
+  justify-content: space-between;
+}
+.home-songer-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
