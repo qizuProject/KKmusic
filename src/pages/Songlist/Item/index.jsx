@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { PlayCircleOutlined } from "@ant-design/icons";
+import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./index.css";
 import "../iconfont/iconfont.css";
-import { reqMusicList, reqDefaultPlayList, reqPlayUrl } from "@api/songlist";
-import axios from "axios";
+import { reqMusicList, reqDefaultPlayList } from "@api/songlist";
 
-export default class Item extends Component {
+class Item extends Component {
   state = {
     isPlay: false,
   };
@@ -17,27 +17,23 @@ export default class Item extends Component {
     id: PropTypes.string.isRequired,
     play: PropTypes.func.isRequired,
   };
-  playMusic = () => {
-    this.props.play();
+  playMusic = (id) => {
+    return async () => {
+      this.props.play();
+      const result = await reqDefaultPlayList();
+      const pid = result.data.data[0].id;
+      const result1 = await reqMusicList(pid);
+      const rid = result1.data.musicList[0].rid;
+      this.props.history.push("/test", { rid: rid });
+    };
   };
 
-  // playMusic = (id) => {
-  //   return async () => {
-  //     const result = await reqDefaultPlayList();
-  //     const pid = result.data[0].id;
-  //     const result1 = await reqMusicList(pid);
-  //     const rid = result1.musicList[0].rid;
-  //     const result2 = await axios.get(`http://localhost:3300/url?rid=${rid}`);
-  //     const url = result2.data.url;
-  //     eventBus.emit("play", url);
-  //   };
-  // };
   render() {
     const { img, title, listencnt, id } = this.props;
     return (
       <div className="item" key={id}>
         <div className="pic_out">
-          <div className="cover" onClick={this.playMusic}>
+          <div className="cover" onClick={this.playMusic(id)}>
             <PlayCircleOutlined className="icon_play" />
           </div>
 
@@ -56,3 +52,5 @@ export default class Item extends Component {
     );
   }
 }
+
+export default withRouter(Item);
