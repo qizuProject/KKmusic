@@ -106,7 +106,7 @@ ul {
   align-items: center;
 }
 
-.tit {
+.songlist_tit {
   font-size: 22px;
   font-weight: 600;
   line-height: 30px;
@@ -139,7 +139,7 @@ span {
   cursor: pointer;
 }
 
-span.active:after {
+span.songlist_active:after {
   color: #000;
   position: absolute;
   content: "";
@@ -154,7 +154,7 @@ span.active:after {
 .showTag {
   position: absolute;
   left: 120px;
-  top: 289px;
+  top: 221px;
   background: #fff;
   width: 65.57%;
   /* height: 646px; */

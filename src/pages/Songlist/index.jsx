@@ -145,9 +145,6 @@ class Songlist extends Component {
 
     return (
       <div className="songlist_page">
-        {/* 头部 */}
-        <div className="songlist_header"></div>
-
         {/* 内容 */}
         <div className="songlist_container">
           <div className="songlist_main">
@@ -174,7 +171,7 @@ class Songlist extends Component {
 
             {/* 最新最热 */}
             <div className="tit_out flex_c">
-              <span className="tit">{tag_title}</span>
+              <span className="songlist_tit">{tag_title}</span>
               {upOrDown ? (
                 <UpOutlined className="icon" onClick={this.changeIcon} />
               ) : (
@@ -183,14 +180,14 @@ class Songlist extends Component {
 
               <div>
                 <span
-                  className={isActive ? "active" : ""}
+                  className={isActive ? "songlist_active" : ""}
                   onClick={this.show("new")}
                 >
                   最新
                 </span>
 
                 <span
-                  className={!isActive ? "active" : ""}
+                  className={!isActive ? "songlist_active" : ""}
                   onClick={this.show("hot")}
                 >
                   最热
