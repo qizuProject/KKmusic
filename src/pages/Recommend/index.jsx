@@ -37,7 +37,7 @@ export default class Recommend extends Component {
   async componentDidMount() {
     // 获取分类导航数量
     const songTags = await reqPlayListTags();
-    const playList = songTags.data.slice(0, 4);
+    const playList = songTags.data[0].data.slice(0, 4);
     this.setState({
       playList,
     });

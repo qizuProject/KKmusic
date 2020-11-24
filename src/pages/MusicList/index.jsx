@@ -5,6 +5,7 @@ import { Pagination } from "antd";
 
 // 引入样式
 import "./index.css";
+import '../../assets/css/reset.css';
 // 引入图片
 import bsb from "@assets/images/bsb.png";
 import dy from "@assets/images/dy.png";
