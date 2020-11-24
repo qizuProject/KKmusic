@@ -7,8 +7,7 @@ import App from "./App";
 import store from "./redux/store";
 
 //引入样式
-import 'antd/dist/antd.css'
-
+import "antd/dist/antd.css";
 
 ReactDOM.render(
   <Provider store={store}>

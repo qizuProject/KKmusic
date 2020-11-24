@@ -1,4 +1,4 @@
-import request from "../untils/request";
+import request from "@utils/request";
 // 热门评论
 export const reqMusicRecComment = (mid, page = 1, rows = 3) => {
   return request.get(

@@ -1,4 +1,4 @@
-import request from "../untils/request";
+import request from "@utils/request";
 // 当前公共请求地址前缀
 const url_prefix = "http://localhost:3300";
 
