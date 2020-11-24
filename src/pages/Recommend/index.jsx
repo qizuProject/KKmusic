@@ -94,7 +94,6 @@ export default class Recommend extends Component {
     const categoryId = e.target.dataset.id * 1;
     // 获取歌手分类导航数据
     const singerList = await reqRecSinger(categoryId);
-    console.log(singerList);
     this.setState({
       singerList: singerList.artistList,
     });
@@ -102,7 +101,6 @@ export default class Recommend extends Component {
   
   render() {
     const {
-      banner,
       playList,
       useRecommendSong,
       bangList,
@@ -167,6 +165,7 @@ export default class Recommend extends Component {
                         src={item.img}
                         alt=""
                       />
+                      
                     </div>
                   </div>
                   <p className="name">
