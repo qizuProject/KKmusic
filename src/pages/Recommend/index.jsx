@@ -72,6 +72,7 @@ export default class Recommend extends Component {
     return async () => {
       // 总歌单数据
       const songList = await reqPlayListById(id);
+      console.log(songList);
       // 使用的歌单数据
       const useRecommendSong = songList.data.data.slice(0, 5);
       this.setState({
